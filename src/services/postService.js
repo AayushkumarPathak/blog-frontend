@@ -52,8 +52,8 @@ export const getUserAllPosts = async (uid) => {
     .then((response) => response.data);
 };
 
-export const loadAllPosts = async () =>{
-  return myAxios.get("/posts").then((response)=>response.data)
+export const loadAllPosts = async (pageNumber,pageSize) =>{
+  return myAxios.get(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`).then((response)=>response.data)
   .catch((error)=>{
     console.log("Error loading all posts: ",error);
   });
