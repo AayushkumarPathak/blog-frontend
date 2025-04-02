@@ -39,22 +39,15 @@ export const createPost = async (postData) => {
  */
 export const getUserAllPosts = async (uid) => {
   return privateAxios
-    .get(`/posts/user/${uid}`,
-
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${
-      //       JSON.parse(localStorage.getItem("loginToken")).token
-      //     }`,
-      //   },
-      // }
-    )
+    .get(`/posts/user/${uid}`)
     .then((response) => response.data);
 };
 
-export const loadAllPosts = async (pageNumber,pageSize) =>{
-  return myAxios.get(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`).then((response)=>response.data)
-  .catch((error)=>{
-    console.log("Error loading all posts: ",error);
-  });
-}
+export const loadAllPosts = async (pageNumber, pageSize) => {
+  return myAxios
+    .get(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.log("Error loading all posts: ", error);
+    });
+};

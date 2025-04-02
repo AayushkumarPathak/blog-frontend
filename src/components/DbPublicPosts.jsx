@@ -8,22 +8,61 @@ function DashboardPublicPosts({title}) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [postConfig, setPostConfig] = useState({
+        totalPages: 0,
+        totalElements: 0, 
+        pageSize: 0,
+        lastPage: false,
+        pageNumber:0,
+      });
+
+    // useEffect(() => {
+    //   setLoading(true);
+    //   loadAllPosts(0,5)
+    //     .then((data) => {
+    //       const postsData = Array.isArray(data) ? data : (data?.content || []);
+    //       setPosts(postsData);
+    //       setLoading(false);
+    //     })
+    //     .catch((err) => {
+    //       console.log("Error loading all posts", err);
+    //       setError("Failed to load posts. Please try again later.");
+    //       setLoading(false);
+    //     });
+    // }, []);
 
     useEffect(() => {
       setLoading(true);
-      loadAllPosts(0,5)
-        .then((data) => {
-          const postsData = Array.isArray(data) ? data : (data?.content || []);
-          setPosts(postsData);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log("Error loading all posts", err);
-          setError("Failed to load posts. Please try again later.");
-          setLoading(false);
-        });
-    }, []);
-
+        loadAllPosts(0,postConfig.pageSize=5)
+          .then((data) => {
+            console.log("API Response:", data);
+            setPosts(data.content || []);
+            setPostConfig({
+              totalPages: data.totalPages,
+              totalElements: data.totalElements, 
+              pageSize: data.pageSize,
+              lastPage: data.lastPage,
+              pageNumber: data.pageNumber,
+    
+            });
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.log("Error in blog feed:", err);
+            setError("Failed to load posts. Please try again later.");
+            setLoading(false);
+          });
+      }, []);
+       const changePage = (pageNumber=0, pageSize=5) =>{
+          loadAllPosts(pageNumber,pageSize).then((data)=>{
+            setPosts(data.content || []);
+          })
+          .catch((err)=>{
+            console.log("Error loading all posts pageNo.=",err);
+            toast.error("Error loading page Size posts");
+            
+          })
+        }
     const truncateContent = (content, maxLength = 100) => {
         return content.length > maxLength ? content.substring(0, maxLength) + "..." : content;
     };
@@ -77,6 +116,73 @@ function DashboardPublicPosts({title}) {
               </div>
             ))
           }
+          <div>
+          <nav aria-label="Page navigation example">
+          <ul class="flex items-center mt-10 justify-center -space-x-px h-8 text-sm">
+           <li >
+              <a
+                href="#"
+                class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                <span class="sr-only">Previous</span>
+                {postConfig.pageNumber > 0 && <svg
+                  class="w-2.5 h-2.5 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 1 1 5l4 4"
+                  />
+                </svg>}
+              </a>
+            </li>
+            {/* Page Numbers */}
+              {[...Array(postConfig.totalPages)].map((_, index) => (
+                <li key={index}>
+                  <button
+                  onClick={()=>changePage(index)}
+                    href="#"
+                    className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
+
+
+            {/* next */}
+            <li>
+              <a
+                href="#"
+                class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                <span class="sr-only">Next</span>
+                <svg
+                  class="w-2.5 h-2.5 rtl:rotate-180"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 6 10"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m1 9 4-4-4-4"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+          </div>
         </div>
     </div>
   );
