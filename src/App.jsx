@@ -9,6 +9,8 @@ import { ToastContainer } from "react-toastify";
 import UserPages from "./pages/UserPages";
 import PageNotFound from "./pages/PageNotFound";
 import BlogsFeed from "./pages/BlogsFeed";
+import UserContextProvider from "./contexts/UserContextProvider";
+import PostPage from "./pages/PostPage";
 
 function App() {
   return (
@@ -21,17 +23,21 @@ function App() {
           className="h-10 w-10"
           closeOnClick
         />
-        <Routes>
-          <Route path="*" element={<PageNotFound/>}/>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/blogfeed" element={<BlogsFeed/>}/>
-          <Route path="/user" element={<UserPages />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-        </Routes>
+        <UserContextProvider>
+          <Routes>
+            <Route path="*" element={<PageNotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/blogfeed" element={<BlogsFeed />} />
+            <Route path="/post:pid" element={<PostPage/>}/>
+
+            <Route path="/user" element={<UserPages />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
+          </Routes>
+        </UserContextProvider>
       </BrowserRouter>
     </>
   );

@@ -3,11 +3,11 @@ import PublicNav from "../components/PublicNav";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { login } from "../services/userService.js";
-import { doLogin} from "../auth/index.js";
+import { doLogin } from "../auth/index.js";
 
 function Login() {
   // const [loggedIn, setLoggedIn] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -22,45 +22,46 @@ function Login() {
   // const userName = formData.username;
   // localStorage.setItem("username", userName);
   const navigate = useNavigate();
-  
-  
+
   const handleLogin = (e) => {
     e.preventDefault();
     // console.log("Form Data:", formData);
     try {
-      if(formData.username.trim() === "" || formData.password.trim() === ""){
+      if (formData.username.trim() === "" || formData.password.trim() === "") {
         toast.error("Please fill all the fields");
         return;
       }
-  
+      if (formData.username.includes("@") == false) {
+        toast.error("Please provide valid email");
+        return;
+      }
+
       // Backend API call
-      login(formData).then((jwtToken) => {
-        console.log("JWT Token:", jwtToken);
-        doLogin(jwtToken,()=>{
-          console.log("jwt saved to local storage");
-          
+      login(formData)
+        .then((jwtToken) => {
+          console.log("JWT Token:", jwtToken);
+          doLogin(jwtToken, () => {
+            console.log("jwt saved to local storage");
+          });
+          toast.success("Login Success");
+          navigate("/user/dashboard");
         })
-        toast.success("Login Success");
-        navigate("/user/dashboard");
-        
-  
-      }).catch((err) => {
-        console.log("Error:", err);
-        if(err?.response?.status === 400 || err?.response?.status === 404 || err?.response?.status === 500){
-          toast.error(err.response.data.message);
-        }else{
-          toast.error("Something went wrong!");
-  
-        }
-      });
+        .catch((err) => {
+          console.log("Error:", err);
+          if (
+            err?.response?.status === 400 ||
+            err?.response?.status === 404 ||
+            err?.response?.status === 500
+          ) {
+            toast.error(err.response.data.message);
+          } else {
+            toast.error("Something went wrong!");
+          }
+        });
     } catch (error) {
       toast.error("Something went wrong!");
-      
     }
   };
-
-
-
 
   // useEffect(() => {
   //   if (loggedIn) {
@@ -71,14 +72,13 @@ function Login() {
     <>
       <PublicNav />
 
-
       <div>
         <div
           className="flex justify-center items-center h-screen"
           id="loginDiv"
         >
           <form
-          noValidate
+            noValidate
             onSubmit={handleLogin}
             className="border-y-4 border-yellow-400 sm:w-full max-w-lg  p-8 shadow-md rounded-md bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%"
           >

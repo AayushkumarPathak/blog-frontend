@@ -1,3 +1,5 @@
+/* <!-- OXygen font --> */
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Playwrite+NG+Modern+Guides&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,9 +8,20 @@
   color-scheme: light dark;
   /* background-color: #242424; */
   background-color: #fff;
-  font-family: "Ubuntu", serif;
+  
+  /* UBUNTU FONT */
+  /* font-family: "Ubuntu", serif;
   font-weight: 400;
+  font-style: normal; */
+
+  font-family: "Oxygen", sans-serif;
+  font-weight: 300;
   font-style: normal;
+  
+  /* Cursive font Oxygen */
+  /* font-family: "Playwrite NG Modern Guides", cursive;
+  font-weight: 400;
+  font-style: normal; */
 }
 #loginDiv{
   background-image: url("/src/assets/loginBg.png");

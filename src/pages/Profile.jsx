@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { getUserAllPosts } from "../services/postService";
-
 function Profile() {
   const gradients = [
     "bg-gradient-to-r from-pink-500 to-red-500",
@@ -14,7 +13,9 @@ function Profile() {
   ];
 
   const [posts, setPosts] = useState([]);
-  const user = JSON.parse(localStorage.getItem("loginToken"))?.user || {};
+  const user =  JSON.parse(localStorage.getItem("loginToken"))?.user || {}
+  
+  
   const toTitleCase = (str) => {
     if (!str) return "";
     return str
@@ -33,6 +34,7 @@ function Profile() {
           console.log("Error getting user posts:", error);
         });
     }
+    
   }, [user?.id]);
 
   return (
@@ -41,7 +43,7 @@ function Profile() {
       <div className="min-h-screen bg-gradient-to-r from-green-200 to-emerald-50 py-8 px-4">      
            <div className="max-w-5xl mx-auto">
           {/* Profile Card */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden mb-8 transition-transform duration-300 hover:shadow-xl">
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-xl shadow-lg shadow-gray-400 overflow-hidden mb-8 transition-transform duration-300 hover:shadow-xl">
             <div className="p-6">
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 {/* Profile Avatar */}
@@ -132,8 +134,9 @@ function Profile() {
                     <h3 className="text-xl font-bold text-white mb-3 line-clamp-1">
                       {toTitleCase(post.title) || "Untitled Post"}
                     </h3>
-                    <p className="text-white/90 mb-4 line-clamp-3 min-h-[4.5rem]">
-                      {post.content || "No content available."}
+                    <p className="text-white/90 mb-4 line-clamp-3 min-h-[4.5rem]"
+                      dangerouslySetInnerHTML={{__html:post.content}}
+                    >
                     </p>
 
                     <div className="flex gap-3 mt-4">

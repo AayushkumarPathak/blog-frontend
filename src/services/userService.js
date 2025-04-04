@@ -10,6 +10,7 @@ export const signup = async(user)=>{
 }
 // BASE_URL is defined in APP_Constants.js
 export const login = async(loginData)=>{
+    
     return myAxios
     .post("/auth/login",loginData)
     .then((response)=>response.data);

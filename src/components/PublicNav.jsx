@@ -1,10 +1,11 @@
+
 import React from "react";
 import logoMine from "../assets/mineLogo.png";
 import { Link } from "react-router";
 function PublicNav() {
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+      <nav className="bg-gray-800 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to={"/"}
@@ -15,20 +16,21 @@ function PublicNav() {
               className="h-12 w-16 rounded-lg"
               alt="Flowbite Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-white">
               Mine Blog's
             </span>
           </Link>
+          {/* Small screen nav button */}
           <button
             data-collapse-toggle="navbar-dropdown"
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
             aria-controls="navbar-dropdown"
             aria-expanded="false"
           >
             <span className="sr-only">Open main menu</span>
             <svg
-              className="w-5 h-5"
+              className="w-5 h-5 text-white"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -47,7 +49,7 @@ function PublicNav() {
             className="hidden w-full md:block md:w-auto"
             id="navbar-dropdown"
           >
-            <ul className="flex flex-col font-medium p-4 text-center md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 text-center md:p-0 mt-4 border border-gray-700 rounded-lg bg-gray-800 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-800 dark:bg-gray-900 dark:border-gray-700">
               <li className="flex text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +68,7 @@ function PublicNav() {
 
                 <Link
                   to={"/"}
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent hover:text-blue-500  md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
+                  className="block py-2 px-3 text-white bg-gray-800 rounded md:bg-transparent hover:text-blue-500 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
                   aria-current="page"
                 >
                   Home
@@ -86,7 +88,7 @@ function PublicNav() {
 
                 <Link
                   to={"/blogfeed"}
-                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent hover:text-blue-500  md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
+                  className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent hover:text-blue-500 md:p-0 md:dark:text-white dark:bg-blue-600 md:dark:bg-transparent"
                   aria-current="page"
                 >
                   Blogs Feed
@@ -111,7 +113,7 @@ function PublicNav() {
 
                 <Link
                   to={"/signup"}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   Signup
                 </Link>
@@ -134,7 +136,7 @@ function PublicNav() {
 
                 <Link
                   to={"/login"}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  className="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
                 >
                   Login
                 </Link>
