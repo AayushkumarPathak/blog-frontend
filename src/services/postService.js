@@ -43,11 +43,19 @@ export const getUserAllPosts = async (uid) => {
     .then((response) => response.data);
 };
 
-export const loadAllPosts = async (pageNumber, pageSize) => {
+export const loadAllPosts = async (pageNumber, pageSize) => { // asc for ascending order
   return myAxios
-    .get(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    .get(`/posts?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=dateCreated&sortDir=${"desc"}`)
     .then((response) => response.data)
     .catch((error) => {
       console.log("Error loading all posts: ", error);
     });
 };
+
+export const loadPostById = async (pid) => {
+  return myAxios.get(`/posts/${pid}`)
+  .then((response)=> response.data)
+  .catch((error)=>{
+    console.log(`Error loading the post with postId: ${pid} `,error);
+  })
+}

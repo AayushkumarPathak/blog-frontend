@@ -1,6 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../contexts/UserContext';
 
 const PageNotFound = () => {
+
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("loginToken"))?.user
+
+  
+
+  const navigatePage = () =>{
+    if(!user){
+      navigate("/")
+    }
+    else{
+      navigate("/user/dashboard");
+    }
+  }
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center px-4">
       <div className="text-center">
@@ -62,7 +78,7 @@ const PageNotFound = () => {
           </button>
           
           <button 
-            onClick={() => window.location.href = '/'}
+            onClick={() => navigatePage()}
             className="group flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform transition-all duration-300 hover:scale-105"
           >
             {/* Home Icon */}

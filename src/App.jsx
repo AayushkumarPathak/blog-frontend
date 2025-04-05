@@ -25,12 +25,12 @@ function App() {
         />
         <UserContextProvider>
           <Routes>
-            <Route path="*" element={<PageNotFound />} />
+            {/* <Route path="*" element={<PageNotFound />} /> */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/blogfeed" element={<BlogsFeed />} />
-            <Route path="/post:pid" element={<PostPage/>}/>
+            <Route path="/post/:postId" element={<PostPage/>}/>
 
             <Route path="/user" element={<UserPages />}>
               <Route path="dashboard" element={<Dashboard />} />

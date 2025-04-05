@@ -109,7 +109,7 @@ function PostForm() {
     <>
       <div className="bg-gray-800 shadow-lg  shadow-gray-500 border-y-4 border-yellow-300 text-white w-full max-w-screen-2xl mx-10 my-10 p-4 rounded-xl ">
         <h1 className="text-2xl font-bold mb-4">
-          <span className="font-light text-yellow-400">
+          <span className="font-light text-yellow-400 italic">
             {" "}
             Hi {userName ? toTitleCase(userName) : "Guest"},{" "}
           </span>
